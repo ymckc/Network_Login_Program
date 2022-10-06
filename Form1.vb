@@ -34,6 +34,7 @@ Public Class Form1
             Dim domain As String
             Dim s As String
             Dim a As Byte()
+            Dim username As String = TextBox1.Text
             Dim password As String
 
             domain = ComboBox1.SelectedItem
@@ -49,7 +50,7 @@ Public Class Form1
 
             '以下是向指定服务器发送登录表单的操作
             Dim login_site As String = "http://222.192.254.21/index.php/index/login"      '接收 POST 请求的服务器地址
-            Dim login_POST As String = "username=" + TextBox1.Text + "&domain=" + domain + "&password=" + password + "&enablemacauth=0"
+            Dim login_POST As String = "username=" + username + "&domain=" + domain + "&password=" + password + "&enablemacauth=0"
 
             Dim login_req As Net.HttpWebRequest
             Dim login_resp As Net.HttpWebResponse
@@ -118,7 +119,8 @@ Public Class Form1
                 TextBox1.Enabled = True
                 TextBox2.Enabled = True
                 ComboBox1.Enabled = True
-                Me.Size = New Size(669, 300)
+                CheckBox1.Enabled = True
+                Me.Size = New Size(670, 300)
                 Label5.Hide()
                 Label6.Hide()
                 Label7.Hide()
@@ -137,7 +139,8 @@ Public Class Form1
                 TextBox1.Enabled = False
                 TextBox2.Enabled = False
                 ComboBox1.Enabled = False
-                Me.Size = New Size(669, 453)
+                CheckBox1.Enabled = False
+                Me.Size = New Size(670, 470)
                 Dim state_username = state_js("logout_username")
                 Dim state_domain = state_js("logout_domain")
                 Dim state_ip = state_js("logout_ip")
@@ -157,6 +160,20 @@ Public Class Form1
                 Button1.Enabled = False
                 ToolStripStatusLabel2.Text = "已登录"
                 ToolStripStatusLabel2.ForeColor = Color.Green
+                ToolStripStatusLabel3.ForeColor = Color.Green
+
+                '登录成功后，默认记住用户名和认证域，通过 checkbox1 的状态决定是否记住密码
+                My.Settings.username_text = TextBox1.Text
+                Dim username_text As String = My.Settings.username_text
+                My.Settings.chkbox_stat = CheckBox1.Checked
+                Dim chkbox_stat As Boolean = My.Settings.chkbox_stat
+                My.Settings.combox_index = ComboBox1.SelectedIndex
+                Dim combobox_index = My.Settings.combox_index
+                If CheckBox1.Checked = True Then
+                    My.Settings.password_text = TextBox2.Text
+                    Dim password_text As String = My.Settings.password_text
+                End If
+                My.Settings.Save()
             End If
 
 
@@ -200,7 +217,8 @@ Public Class Form1
         TextBox1.Enabled = True
         TextBox2.Enabled = True
         ComboBox1.Enabled = True
-        Me.Size = New Size(669, 300)
+        CheckBox1.Enabled = True
+        Me.Size = New Size(670, 300)
         Line1.Hide()
         Label5.Hide()
         Label6.Hide()
@@ -213,6 +231,7 @@ Public Class Form1
         Button2.Hide()
         ToolStripStatusLabel2.Text = "已连接到校园网，等待登录"
         ToolStripStatusLabel2.ForeColor = Color.Black
+        ToolStripStatusLabel3.ForeColor = Color.Black
     End Sub
 
     '程序启动操作
@@ -221,7 +240,8 @@ Public Class Form1
         TextBox1.Enabled = True
         TextBox2.Enabled = True
         ComboBox1.Enabled = True
-        Me.Size = New Size(669, 300)
+        CheckBox1.Enabled = True
+        Me.Size = New Size(670, 300)
         Line1.Hide()
         Label5.Hide()
         Label6.Hide()
@@ -244,42 +264,55 @@ Public Class Form1
             If My.Computer.Network.Ping("222.192.254.21") Then
                 ToolStripStatusLabel2.Text = "已连接到校园网，等待登录"
 
+                '读取上一次已记住的登录信息
+                CheckBox1.Checked = My.Settings.chkbox_stat
+                ComboBox1.SelectedIndex = My.Settings.combox_index
+                If CheckBox1.Checked = True Then
+                    TextBox1.Text = My.Settings.username_text
+                    TextBox2.Text = My.Settings.password_text
+                Else
+                    CheckBox1.Checked = False
+                    TextBox1.Text = My.Settings.username_text
+                    TextBox2.Text = ""
+                End If
+
                 '读取详细登录信息
                 Dim state_site As String = "http://222.192.254.21/index.php/index/init"
-                Dim POST As String = "Check state"
+                    Dim POST As String = "Check state"
 
-                Dim state_req As Net.HttpWebRequest
-                Dim state_resp As Net.HttpWebResponse
+                    Dim state_req As Net.HttpWebRequest
+                    Dim state_resp As Net.HttpWebResponse
 
-                state_req = CType(Net.WebRequest.Create(state_site), Net.HttpWebRequest)
-                state_req.UserAgent = "Login UniNET 0.1.15"
-                state_req.AllowAutoRedirect = True
-                state_req.ContentType = "application/x-www-form-urlencoded"
-                state_req.ContentLength = POST.Length
-                state_req.Method = "POST"
-                state_req.KeepAlive = True
+                    state_req = CType(Net.WebRequest.Create(state_site), Net.HttpWebRequest)
+                    state_req.UserAgent = "Login UniNET 0.1.15"
+                    state_req.AllowAutoRedirect = True
+                    state_req.ContentType = "application/x-www-form-urlencoded"
+                    state_req.ContentLength = POST.Length
+                    state_req.Method = "POST"
+                    state_req.KeepAlive = True
 
-                Dim state_requestStream As IO.Stream = state_req.GetRequestStream()
-                Dim state_postBytes As Byte() = System.Text.Encoding.ASCII.GetBytes(POST)
-                state_requestStream.Write(state_postBytes, 0, state_postBytes.Length)
-                state_requestStream.Close()
+                    Dim state_requestStream As IO.Stream = state_req.GetRequestStream()
+                    Dim state_postBytes As Byte() = System.Text.Encoding.ASCII.GetBytes(POST)
+                    state_requestStream.Write(state_postBytes, 0, state_postBytes.Length)
+                    state_requestStream.Close()
 
-                state_resp = CType(state_req.GetResponse(), Net.HttpWebResponse)
+                    state_resp = CType(state_req.GetResponse(), Net.HttpWebResponse)
 
 
-                '获取详细登录信息操作
-                Dim state_dataStream As Stream = state_resp.GetResponseStream()
-                Dim state_reader As New StreamReader(state_dataStream)
-                Dim state_responseFromServer As String = state_reader.ReadToEnd()
-                Dim state_JsonStr As String = state_responseFromServer
-                Dim state_js As Object = New System.Web.Script.Serialization.JavaScriptSerializer().Deserialize(Of Object)(state_JsonStr)
-                Dim status = state_js("status")
+                    '获取详细登录信息操作
+                    Dim state_dataStream As Stream = state_resp.GetResponseStream()
+                    Dim state_reader As New StreamReader(state_dataStream)
+                    Dim state_responseFromServer As String = state_reader.ReadToEnd()
+                    Dim state_JsonStr As String = state_responseFromServer
+                    Dim state_js As Object = New System.Web.Script.Serialization.JavaScriptSerializer().Deserialize(Of Object)(state_JsonStr)
+                    Dim status = state_js("status")
 
-                If status = 0 Then
+                    If status = 0 Then
                     TextBox1.Enabled = True
                     TextBox2.Enabled = True
                     ComboBox1.Enabled = True
-                    Me.Size = New Size(669, 300)
+                    CheckBox1.Enabled = True
+                    Me.Size = New Size(670, 300)
                     Line1.Hide()
                     Label5.Hide()
                     Label6.Hide()
@@ -294,10 +327,11 @@ Public Class Form1
                     Button2.Hide()
                     Button1.Enabled = True
                     ToolStripStatusLabel2.Text = "已连接到校园网，等待登录"
+
                 End If
 
                 If status = 1 Then
-                    Me.Size = New Size(669, 453)
+                    Me.Size = New Size(670, 470)
                     Dim state_username = state_js("logout_username")
                     Dim state_domain = state_js("logout_domain")
                     Dim state_ip = state_js("logout_ip")
@@ -305,6 +339,7 @@ Public Class Form1
                     TextBox1.Enabled = False
                     TextBox2.Enabled = False
                     ComboBox1.Enabled = False
+                    CheckBox1.Enabled = False
                     Line1.Show()
                     Label5.Show()
                     Label6.Show()
@@ -320,6 +355,7 @@ Public Class Form1
                     Button1.Enabled = False
                     ToolStripStatusLabel2.Text = "已登录"
                     ToolStripStatusLabel2.ForeColor = Color.Green
+                    ToolStripStatusLabel3.ForeColor = Color.Green
                 End If
             Else
                 text = ("未检测到校园网环境" & Chr(13) & "请连接到校园网后重试")
@@ -331,16 +367,29 @@ Public Class Form1
                 End If
                 ToolStripStatusLabel2.Text = "连接超时，请检查网络设置"
                 ToolStripStatusLabel2.ForeColor = Color.Red
+                ToolStripStatusLabel3.ForeColor = Color.Red
                 MsgBox("连接超时，请检查网络设置", vbExclamation, "警告")
             End If
 
         Else
             MsgBox("请检查网络设置", vbExclamation, "警告")
         End If
+
     End Sub
 
     '退出程序
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        '默认记住用户名和认证域，直接退出程序时不需要记住密码
+        My.Settings.username_text = TextBox1.Text
+        Dim username_text As String = My.Settings.username_text
+        My.Settings.combox_index = ComboBox1.SelectedIndex
+        Dim combobox_index = My.Settings.combox_index
+        If ToolStripStatusLabel3.ForeColor = Color.Green Then
+            My.Settings.chkbox_stat = CheckBox1.Checked
+            Dim chkbox_stat As Boolean = My.Settings.chkbox_stat
+        End If
+        My.Settings.Save()
+
         Me.Dispose()
     End Sub
 
@@ -354,4 +403,19 @@ Public Class Form1
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         System.Diagnostics.Process.Start("http://222.192.254.21/service.php")
     End Sub
+
+    '程序结束时操作
+    Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        '默认记住用户名和认证域，直接退出程序时不需要记住密码
+        My.Settings.username_text = TextBox1.Text
+        Dim username_text As String = My.Settings.username_text
+        My.Settings.combox_index = ComboBox1.SelectedIndex
+        Dim combobox_index = My.Settings.combox_index
+        If ToolStripStatusLabel3.ForeColor = Color.Green Then
+            My.Settings.chkbox_stat = CheckBox1.Checked
+            Dim chkbox_stat As Boolean = My.Settings.chkbox_stat
+        End If
+        My.Settings.Save()
+    End Sub
+
 End Class

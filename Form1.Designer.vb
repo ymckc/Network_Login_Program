@@ -46,6 +46,8 @@ Partial Class Form1
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Button4 = New System.Windows.Forms.Button()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.ToolStripStatusLabel3 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -54,7 +56,7 @@ Partial Class Form1
         '
         Me.Button1.AccessibleDescription = "点此进行登录"
         Me.Button1.AccessibleName = "登录按钮"
-        Me.Button1.Location = New System.Drawing.Point(493, 60)
+        Me.Button1.Location = New System.Drawing.Point(494, 54)
         Me.Button1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(120, 40)
@@ -66,7 +68,7 @@ Partial Class Form1
         '
         Me.Button2.AccessibleDescription = "点此退出登录"
         Me.Button2.AccessibleName = "退出登录按钮"
-        Me.Button2.Location = New System.Drawing.Point(493, 316)
+        Me.Button2.Location = New System.Drawing.Point(494, 334)
         Me.Button2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(120, 40)
@@ -81,7 +83,7 @@ Partial Class Form1
         Me.TextBox1.AllowDrop = True
         Me.TextBox1.Font = New System.Drawing.Font("Microsoft YaHei UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.TextBox1.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.TextBox1.Location = New System.Drawing.Point(297, 60)
+        Me.TextBox1.Location = New System.Drawing.Point(298, 59)
         Me.TextBox1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TextBox1.MaxLength = 12
         Me.TextBox1.Name = "TextBox1"
@@ -95,7 +97,7 @@ Partial Class Form1
         Me.TextBox2.AllowDrop = True
         Me.TextBox2.Font = New System.Drawing.Font("Microsoft YaHei UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.TextBox2.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.TextBox2.Location = New System.Drawing.Point(297, 108)
+        Me.TextBox2.Location = New System.Drawing.Point(298, 103)
         Me.TextBox2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TextBox2.MaxLength = 16
         Me.TextBox2.Name = "TextBox2"
@@ -107,7 +109,7 @@ Partial Class Form1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft YaHei UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.Label1.Location = New System.Drawing.Point(216, 68)
+        Me.Label1.Location = New System.Drawing.Point(217, 62)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(61, 23)
         Me.Label1.TabIndex = 4
@@ -117,7 +119,7 @@ Partial Class Form1
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft YaHei UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.Label2.Location = New System.Drawing.Point(232, 116)
+        Me.Label2.Location = New System.Drawing.Point(234, 106)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(44, 23)
         Me.Label2.TabIndex = 5
@@ -125,7 +127,7 @@ Partial Class Form1
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(493, 148)
+        Me.Button3.Location = New System.Drawing.Point(494, 143)
         Me.Button3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(120, 40)
@@ -140,7 +142,7 @@ Partial Class Form1
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.ImeMode = System.Windows.Forms.ImeMode.Disable
         Me.ComboBox1.Items.AddRange(New Object() {"student", "free-student", "internet", "baoyue", "qgzxyh", "qgzxby", "NJCIT"})
-        Me.ComboBox1.Location = New System.Drawing.Point(297, 157)
+        Me.ComboBox1.Location = New System.Drawing.Point(298, 148)
         Me.ComboBox1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(175, 31)
@@ -150,7 +152,7 @@ Partial Class Form1
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft YaHei UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.Label3.Location = New System.Drawing.Point(216, 165)
+        Me.Label3.Location = New System.Drawing.Point(217, 151)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(61, 23)
         Me.Label3.TabIndex = 9
@@ -172,18 +174,18 @@ Partial Class Form1
         'StatusStrip1
         '
         Me.StatusStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.ToolStripStatusLabel2})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 380)
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel3, Me.ToolStripStatusLabel1, Me.ToolStripStatusLabel2})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 397)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Padding = New System.Windows.Forms.Padding(1, 0, 13, 0)
-        Me.StatusStrip1.Size = New System.Drawing.Size(651, 26)
+        Me.StatusStrip1.Size = New System.Drawing.Size(652, 26)
         Me.StatusStrip1.SizingGrip = False
         Me.StatusStrip1.TabIndex = 6
         Me.StatusStrip1.Text = "StatusStrip1"
         '
         'Line1
         '
-        Me.Line1.Location = New System.Drawing.Point(193, 210)
+        Me.Line1.Location = New System.Drawing.Point(194, 228)
         Me.Line1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Line1.Name = "Line1"
         Me.Line1.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -195,7 +197,7 @@ Partial Class Form1
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft YaHei UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.Label5.Location = New System.Drawing.Point(189, 231)
+        Me.Label5.Location = New System.Drawing.Point(190, 249)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(88, 25)
         Me.Label5.TabIndex = 12
@@ -205,7 +207,7 @@ Partial Class Form1
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft YaHei UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.Label6.Location = New System.Drawing.Point(216, 266)
+        Me.Label6.Location = New System.Drawing.Point(217, 284)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(61, 23)
         Me.Label6.TabIndex = 13
@@ -215,7 +217,7 @@ Partial Class Form1
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft YaHei UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.Label7.Location = New System.Drawing.Point(216, 300)
+        Me.Label7.Location = New System.Drawing.Point(217, 318)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(61, 23)
         Me.Label7.TabIndex = 14
@@ -225,7 +227,7 @@ Partial Class Form1
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Microsoft YaHei UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.Label8.Location = New System.Drawing.Point(213, 333)
+        Me.Label8.Location = New System.Drawing.Point(214, 351)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(64, 23)
         Me.Label8.TabIndex = 15
@@ -235,7 +237,7 @@ Partial Class Form1
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Microsoft YaHei UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.Label9.Location = New System.Drawing.Point(293, 266)
+        Me.Label9.Location = New System.Drawing.Point(294, 284)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(92, 23)
         Me.Label9.TabIndex = 16
@@ -245,7 +247,7 @@ Partial Class Form1
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Microsoft YaHei UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.Label10.Location = New System.Drawing.Point(293, 300)
+        Me.Label10.Location = New System.Drawing.Point(294, 318)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(74, 23)
         Me.Label10.TabIndex = 17
@@ -255,7 +257,7 @@ Partial Class Form1
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Microsoft YaHei UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.Label11.Location = New System.Drawing.Point(293, 333)
+        Me.Label11.Location = New System.Drawing.Point(294, 351)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(96, 23)
         Me.Label11.TabIndex = 18
@@ -266,7 +268,8 @@ Partial Class Form1
         Me.PictureBox1.Image = Global.Login.My.Resources.Resources.internet
         Me.PictureBox1.Location = New System.Drawing.Point(0, 0)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(164, 380)
+        Me.PictureBox1.Size = New System.Drawing.Size(172, 394)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox1.TabIndex = 19
         Me.PictureBox1.TabStop = False
         '
@@ -274,7 +277,7 @@ Partial Class Form1
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft YaHei UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.Label4.Location = New System.Drawing.Point(189, 33)
+        Me.Label4.Location = New System.Drawing.Point(190, 27)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(88, 25)
         Me.Label4.TabIndex = 20
@@ -282,19 +285,37 @@ Partial Class Form1
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(493, 104)
+        Me.Button4.Location = New System.Drawing.Point(494, 99)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(120, 39)
         Me.Button4.TabIndex = 21
         Me.Button4.Text = "自助服务(&S)"
         Me.Button4.UseVisualStyleBackColor = True
         '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(298, 193)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(113, 19)
+        Me.CheckBox1.TabIndex = 22
+        Me.CheckBox1.Text = "记住密码(&R)"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
+        'ToolStripStatusLabel3
+        '
+        Me.ToolStripStatusLabel3.Font = New System.Drawing.Font("Microsoft YaHei UI", 9.0!)
+        Me.ToolStripStatusLabel3.Name = "ToolStripStatusLabel3"
+        Me.ToolStripStatusLabel3.Size = New System.Drawing.Size(19, 20)
+        Me.ToolStripStatusLabel3.Text = "●"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(651, 406)
+        Me.ClientSize = New System.Drawing.Size(652, 423)
+        Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.Label4)
@@ -355,4 +376,6 @@ Partial Class Form1
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Label4 As Label
     Friend WithEvents Button4 As Button
+    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents ToolStripStatusLabel3 As ToolStripStatusLabel
 End Class
