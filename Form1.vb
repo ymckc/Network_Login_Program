@@ -1,4 +1,4 @@
-﻿Imports System.Net.Sockets
+Imports System.Net.Sockets
 Imports System.IO
 Imports Newtonsoft.Json
 Imports System.ComponentModel
@@ -49,7 +49,7 @@ Public Class Form1
             password = Uri.EscapeDataString(s)                          '对 s 存取的密码进行 URL 编码，使之可以在数据包中传输
 
             '以下是向指定服务器发送登录表单的操作
-            Dim login_site As String = "http://222.192.254.21/index.php/index/login"      '接收 POST 请求的服务器地址
+            Dim login_site As String = "http://[Your Auth Server Here]/index.php/index/login"      '接收 POST 请求的服务器地址
             Dim login_POST As String = "username=" + username + "&domain=" + domain + "&password=" + password + "&enablemacauth=0"
 
             Dim login_req As Net.HttpWebRequest
@@ -71,7 +71,7 @@ Public Class Form1
             login_resp = CType(login_req.GetResponse(), Net.HttpWebResponse)
 
             '获取详细登录信息
-            Dim state_site As String = "http://222.192.254.21/index.php/index/init"
+            Dim state_site As String = "http://[Your Auth Server Here]/index.php/index/init"
             Dim state_POST As String = "Check state"
 
             Dim state_req As Net.HttpWebRequest
@@ -191,7 +191,7 @@ Public Class Form1
     '点击退出登录按钮的操作
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         '退出登录，通过直接访问 URL 实现
-        Dim cweb As String = "http://222.192.254.21/index.php/index/logout"
+        Dim cweb As String = "http://[Your Auth Server Here]/index.php/index/logout"
         Dim POST As String = "logout"
 
         Dim request As Net.HttpWebRequest
@@ -261,7 +261,7 @@ Public Class Form1
         Dim caption As String
         If My.Computer.Network.IsAvailable = True Then
             '对认证服务器进行一次 Ping
-            If My.Computer.Network.Ping("222.192.254.21") Then
+            If My.Computer.Network.Ping("[Your Auth Server Here]") Then
                 ToolStripStatusLabel2.Text = "已连接到校园网，等待登录"
 
                 '读取上一次已记住的登录信息
@@ -277,7 +277,7 @@ Public Class Form1
                 End If
 
                 '读取详细登录信息
-                Dim state_site As String = "http://222.192.254.21/index.php/index/init"
+                Dim state_site As String = "http://[Your Auth Server Here]/index.php/index/init"
                     Dim POST As String = "Check state"
 
                     Dim state_req As Net.HttpWebRequest
@@ -395,13 +395,13 @@ Public Class Form1
 
     '点击顶栏帮助按钮的操作
     Private Sub Form1_HelpButtonClicked(sender As Object, e As CancelEventArgs) Handles Me.HelpButtonClicked
-        Dim text As String = ("        本程序可用于登录 NJCIT 校园网                    " & Chr(13) & "        请在 NJCIT 校园网环境下使用" & Chr(13) & "        账号问题请联系所在楼栋校园网维护人员" & Chr(13) & "" & Chr(13) & "        开发者：ymckc@foxmail.com（北苑）" & Chr(13) & "        2022年10月")
+        Dim text As String = ("        本程序可用于登录校园网                    " & Chr(13) & "        请在校园网环境下使用" & Chr(13) & "        账号问题请联系所在楼栋校园网维护人员" & Chr(13) & "" & Chr(13) & "        开发者：ymckc@foxmail.com" & Chr(13) & "        2022年10月")
         MessageBox.Show(text, caption:="关于本程序", buttons:=vbOKOnly, icon:=vbInformation)
     End Sub
 
     '打开自助服务网页
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        System.Diagnostics.Process.Start("http://222.192.254.21/service.php")
+        System.Diagnostics.Process.Start("http://[Your Auth Server Here]/service.php")
     End Sub
 
     '程序结束时操作
